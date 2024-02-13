@@ -12,6 +12,7 @@ async function populate() {
     populateHeroes(superheroes);
 }
 
+// append h1 and para elements that contain heroes squadname and origins
 function populateHeader(obj) {
     const header = document.querySelector("header");
     const myH1 = document.createElement("h1");
@@ -21,6 +22,44 @@ function populateHeader(obj) {
     const myPara = document.createElement("p");
     myPara.textContent = `Hometown: ${obj.homeTown} // Formed: ${obj.formed}`;
     header.appendChild(myPara);
+};
+
+function populateHeroes(obj) {
+    const section = document.querySelector("section");
+    const heroes = obj.members;
+
+    // iterate through each members profile
+    // creates elements to append heroes characteristics
+    for (const hero of heroes) {
+        const myArticle = document.createElement("article");
+        const myH2 = document.createElement("h2");
+        const myPara1 = document.createElement("p");
+        const myPara2 = document.createElement("p");
+        const myPara3 = document.createElement("p");
+        const myList = document.createElement("ul");
+
+    // populate elements
+        myH2.textContent = hero.name;
+        myPara1.textContent = `Secret identity: ${hero.secretIdentity}`;
+        myPara2.textContent = `Age: ${hero.age}`;
+        myPara3.textContent = "Superpowers:";
+
+        // iterate superpowers for each members and creates list elements
+        const superPowers = hero.powers;
+        for (const power of superPowers) {
+            const listItem = document.createElement("li");
+            listItem.textContent = power;
+            myList.appendChild(listItem);
+        }
+
+        myArticle.appendChild(myH2);
+        myArticle.appendChild(myPara1);
+        myArticle.appendChild(myPara2);
+        myArticle.appendChild(myPara3);
+        myArticle.appendChild(myList);
+
+        section.appendChild(myArticle)
+    }
 }
 
-
+populate();
